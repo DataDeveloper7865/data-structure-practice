@@ -22,6 +22,7 @@ class SinglyLinkedList {
         this.tail = null;
     }
 
+    //add item to tail
     push(val) {
         let newNode = new Node(val);
 
@@ -37,7 +38,39 @@ class SinglyLinkedList {
         this.length++;
         return this;
     }
-    
+
+    // traverse linked list
+    traverse() {
+        let current = this.head;
+        while(current) {
+            console.log(current.val);
+            current = current.next;
+        }
+    }
+
+    //remove item from tail
+    pop() {
+        if (!this.head) {
+            return undefined;
+        }
+        //loop through entire list until tail
+        let laggingNode = this.head;
+        let current = this.head;
+        while(current.next) {
+            laggingNode = current;
+            current = current.next;
+        }
+        this.tail = laggingNode;
+        this.tail.next = null;
+        this.length--;
+        if (this.length === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+        return current;
+
+    }
+
 }
 
 let list = new SinglyLinkedList()
