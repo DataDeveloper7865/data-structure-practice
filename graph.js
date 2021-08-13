@@ -7,11 +7,11 @@ class Graph {
     }
 
     addVertex(name) {
-        this.adjacencyList[name] = [];
+        if(!this.adjacencyList[name]) this.adjacencyList[name]  = [];
     }
 
-    addEdge(start, end) {
-        this.adjacencyList[start].push(end);
-        this.adjacencyList[end].push(start);
+    addEdge(v1, v2) {
+        this.adjacencyList[v1].push(v2);
+        this.adjacencyList[v2].push(v1);
     }
 }
