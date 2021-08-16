@@ -31,15 +31,16 @@ class Graph {
     DFSRecursive(vert) {
         let visited = [];
         let visitedVerticies = {};
+        const adjacencyList = this.adjacencyList;
 
         function DFS(vert) {
             if (vert == null) {
-                return;
+                return null;
             }
             visitedVerticies[vert] = true;
             visited.push(vert);
 
-            for (let node of adjacencyList) {
+            for (let node of adjacencyList[vert]) {
                 if (visitedVerticies[node] == undefined) {
                     DFS(node);
                 }
@@ -47,5 +48,31 @@ class Graph {
         }
         DFS(vert);
         return visited;
+    }
+
+    DFSIterative(vert) {
+        let stack = [];
+        let results = [];
+        let visitedVert = {};
+        let adjacencyList = this.adjacencyList;
+
+        stack.push(vert);
+        visitedVert[vert] = true;
+
+        while(stack.length != 0) {
+            let curVisit = stack.pop();
+
+            if (visitedVert[curVisit] == undefined) {
+                visitedVert[curVisit] = true;
+                results.push(curVisit);
+                for (let node of adjacencyList[curVisit]) {
+                    stack.push(node);
+                }
+            }
+
+
+        }
+
+        return results;
     }
 }
