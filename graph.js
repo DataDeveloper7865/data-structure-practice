@@ -54,25 +54,45 @@ class Graph {
         let stack = [];
         let results = [];
         let visitedVert = {};
-        let adjacencyList = this.adjacencyList;
 
         stack.push(vert);
         visitedVert[vert] = true;
 
         while(stack.length != 0) {
             let curVisit = stack.pop();
+            results.push(curVisit);
 
-            if (visitedVert[curVisit] == undefined) {
-                visitedVert[curVisit] = true;
-                results.push(curVisit);
-                for (let node of adjacencyList[curVisit]) {
-                    stack.push(node);
+            this.adjacencyList[curVisit].forEach(neighbor => {
+                if(!visitedVert[neighbor]) {
+                    visitedVert[neighbor] = true;
+                    stack.push(neighbor)
                 }
-            }
-
-
+            }); 
         }
 
         return results;
     }
+
+    BFSIterative(start) {
+        let queue = [start];
+        let visited = [];
+        let visitedVerts = {start: true};
+        let currentVertex;
+
+        while(queue.length) {
+            currentVertex = queue.shift();
+            results.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach(neighbor => {
+                if(!visitedVerts[neighbor]) {
+                    visitedVerts[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            })
+
+        }
+
+        return visited;
+    }
+
+
 }
