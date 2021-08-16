@@ -27,4 +27,25 @@ class Graph {
         }
         delete this.adjacencyList[vertex];
     }
+
+    DFSRecursive(vert) {
+        let visited = [];
+        let visitedVerticies = {};
+
+        function DFS(vert) {
+            if (vert == null) {
+                return;
+            }
+            visitedVerticies[vert] = true;
+            visited.push(vert);
+
+            for (let node of adjacencyList) {
+                if (visitedVerticies[node] == undefined) {
+                    DFS(node);
+                }
+            }
+        }
+        DFS(vert);
+        return visited;
+    }
 }
